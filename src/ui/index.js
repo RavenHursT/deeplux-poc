@@ -8,9 +8,9 @@ wrapper ? ReactDOM.render(<AppRoot />, wrapper) : false
 
 const socket = new Socket('ws://localhost:8080')
 socket.on('connect', () => {
-    console.log('Welp.. that worked')
+  console.log('Welp.. that worked')
 })
 
 socket.on('data', d => {
-    console.log('data => ', d.toString())
+  console.log('data => ', d.toString())
 })
