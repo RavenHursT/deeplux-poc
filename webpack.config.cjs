@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
@@ -15,7 +16,14 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: [
+                          ['@babel/plugin-transform-runtime', {
+                            regenerator:true
+                          }]
+                        ]
+                    }
                 }
             },
             {
@@ -29,6 +37,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("development")
+            }
+        }),
         new HtmlWebPackPlugin({
             template: './src/ui/index.html',
             filename: './index.html'
